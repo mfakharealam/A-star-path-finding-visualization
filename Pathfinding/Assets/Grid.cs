@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour {
 
     public Vector2 gridWorldSize;
+    public bool OnlyDisplayPathGizmos;
     public float nodeRadius;
     public Transform player;
     public LayerMask unwalkableMask;
@@ -21,6 +22,15 @@ public class Grid : MonoBehaviour {
         CreateGrid();
 
     }
+
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
+
     private void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
@@ -75,19 +85,34 @@ public class Grid : MonoBehaviour {
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
-        if (grid != null)
+
+        if (OnlyDisplayPathGizmos)
         {
-            foreach (Node n in grid)
+            if (path != null)
             {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                if (path != null)
+                foreach(Node n in path)
                 {
-                    if (path.Contains(n))
-                    {
-                        Gizmos.color = Color.black;
-                    }
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));                                                    
                 }
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+            }
+        }
+        else
+        {
+            if (grid != null)
+            {
+                foreach (Node n in grid)
+                {
+                    Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                    if (path != null)
+                    {
+                        if (path.Contains(n))
+                        {
+                            Gizmos.color = Color.black;
+                        }
+                    }
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+                }
             }
         }
     }

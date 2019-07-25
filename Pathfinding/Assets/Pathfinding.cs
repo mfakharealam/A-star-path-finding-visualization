@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class Pathfinding : MonoBehaviour {
 
@@ -13,33 +14,31 @@ public class Pathfinding : MonoBehaviour {
 
     void Update()
     {
-        findPath(seeker.position, target.position);
+        if (Input.GetButtonDown("Jump"))
+        {
+            findPath(seeker.position, target.position);
+        }
     }
 
     void findPath(Vector3 startPos, Vector3 targetPos)
     {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
-        List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0)
         {
-            Node currNode = openSet[0];
-            for (int i = 0; i < openSet.Count; i++)
-            {
-                if (openSet[i].fCost < currNode.fCost || openSet[i].fCost == currNode.fCost && openSet[i].hCost < currNode.hCost)
-                {
-                    currNode = openSet[i];
-                }
-
-            }
-            openSet.Remove(currNode);
+            Node currNode = openSet.RemoveFirst();
             closedSet.Add(currNode);
             if (currNode == targetNode)
             {
+                sw.Stop();
+                print("path found: " + sw.ElapsedMilliseconds + " ms");
                 retracePath(startNode, targetNode);
                 return;
             }
