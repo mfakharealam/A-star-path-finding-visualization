@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 944075366}
   - component: {fileID: 944075365}
   - component: {fileID: 944075367}
+  - component: {fileID: 944075368}
   m_Layer: 0
   m_Name: A*
   m_TagString: Untagged
@@ -537,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridWorldSize: {x: 100, y: 100}
-  OnlyDisplayPathGizmos: 1
+  displayGridGizmos: 0
   nodeRadius: 0.5
   player: {fileID: 1605266799}
   unwalkableMask:
@@ -567,8 +568,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebca25b705c4a174a853d1950d84d421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 1605266799}
-  target: {fileID: 1799315546}
+--- !u!114 &944075368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 944075364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053ce4bbbe2c14d4cbfb27c8440e2056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1328276862
 GameObject:
   m_ObjectHideFlags: 0

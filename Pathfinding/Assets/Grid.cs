@@ -94,7 +94,7 @@ public class Grid : MonoBehaviour
                 Gizmos.color = (n.walkable) ? Color.white : Color.red;
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
             }
-        }
+        }                                                 
     }
 
 }

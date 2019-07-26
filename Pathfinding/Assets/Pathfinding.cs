@@ -101,7 +101,7 @@ public class Pathfinding : MonoBehaviour {
             }
             oldDir = newDir; 
         }
-        return waypoints.ToArray();
+        return waypoints.ToArray(); 
     }
 
     int getDistance(Node nodeA, Node nodeB)
