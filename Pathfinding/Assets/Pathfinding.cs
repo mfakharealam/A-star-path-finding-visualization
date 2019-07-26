@@ -97,11 +97,11 @@ public class Pathfinding : MonoBehaviour {
             Vector2 newDir = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);     // last two nodes
             if (oldDir != newDir)
             {
-                waypoints.Add(path[i].worldPosition);
+                waypoints.Add(path[i - 1].worldPosition);
             }
             oldDir = newDir; 
         }
-        return waypoints.ToArray(); 
+        return waypoints.ToArray();            
     }
 
     int getDistance(Node nodeA, Node nodeB)

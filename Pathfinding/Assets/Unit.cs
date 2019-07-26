@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
     public Transform target;
-    float speed = 5;
+    float speed = 2;
     Vector3[] path;
     int targetIndex;
 
@@ -19,8 +19,7 @@ public class Unit : MonoBehaviour {
         if (pathSucessful)
         {
             path = newPath;
-            StartCoroutine("FollowPath");
-
+            StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
     }
