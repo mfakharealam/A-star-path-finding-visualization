@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 524798922}
   - component: {fileID: 524798921}
   - component: {fileID: 524798920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,6 +612,15 @@ MonoBehaviour:
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 512
+  walkableRegions:
+  - terrainMask:
+      serializedVersion: 2
+      m_Bits: 1024
+    terrainPenalty: 0
+  - terrainMask:
+      serializedVersion: 2
+      m_Bits: 2048
+    terrainPenalty: 5
 --- !u!4 &944075366
 Transform:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
     public TerrainType[] walkableRegions;
-
+    LayerMask walkableMask;
 
     private void Awake()
     {
