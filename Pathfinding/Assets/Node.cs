@@ -5,16 +5,17 @@ using UnityEngine;
 public class Node : IHeapItem<Node>{
     public bool walkable;
     public int gCost, hCost;
-    public int gridX, gridY, heapIndex;
-    public Vector3 worldPosition;
+    public int gridX, gridY, heapIndex, movementPenalty;
+    public Vector3 worldPosition;                        
     public Node parent;
 
-    public Node(bool _walkable, Vector3 _worldPosition, int _gridX, int _gridY)
+    public Node(bool _walkable, Vector3 _worldPosition, int _gridX, int _gridY, int _penalty)
     {
         walkable = _walkable;
         worldPosition = _worldPosition;
         gridX = _gridX;
         gridY = _gridY;
+        movementPenalty = _penalty;
     }
                         
     public int fCost
