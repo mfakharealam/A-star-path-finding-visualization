@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
     public TerrainType[] walkableRegions;
+    Dictionary<int, int> walkableDictionary = new Dictionary<int, int>();
     LayerMask walkableMask;
 
     private void Awake()
@@ -21,6 +22,11 @@ public class Grid : MonoBehaviour
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
+        foreach (TerrainType region in walkableRegions)
+        {
+            walkableMask.value += region.terrainMask.value;     // bitwise OR
+            walkableDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2), region.terrainPenalty);
+        }
         CreateGrid();
 
     }
@@ -45,7 +51,15 @@ public class Grid : MonoBehaviour
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
                 int penality = 0;
 
-                // raycast code 
+                if (walkable)
+                {
+                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 100, walkableMask))
+                    {
+                        walkableDictionary.TryGetValue(hit.collider.gameObject.layer, out penality);
+                    }
+                }
 
                 grid[x, y] = new Node(walkable, worldPoint, x, y, penality);
 
